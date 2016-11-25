@@ -15,6 +15,11 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+
+# pick: FEATHER_M0, METRO_M0, FEATHER_SAMR, GEMMA_M0, TRINKET_M0
+
+TARGET=TRINKET_M0
+
 # -----------------------------------------------------------------------------
 # Paths
 ifeq ($(OS),Windows_NT)
@@ -68,10 +73,27 @@ else
 CFLAGS+=-Os -DDEBUG=0
 endif
 
-# Adafruit Feather Zero (0x239A 0x000B)
-#CFLAGS_EXTRA?=-D__SAMD21G18A__ -DUSB_PID_HIGH=0x00 -DUSB_PID_LOW=0x0B -DUSB_VID_LOW=0x9A -DUSB_VID_HIGH=0x23
-# Adafruit Feather SAMR (0x239A 0x0014)
-CFLAGS_EXTRA?=-D__SAMR21G18A__ -DUSB_PID_HIGH=0x00 -DUSB_PID_LOW=0x14 -DUSB_VID_LOW=0x9A -DUSB_VID_HIGH=0x23
+ifeq ($(TARGET), FEATHER_M0)
+   # Adafruit Feather Zero (0x239A 0x000B)
+   CFLAGS_EXTRA?=-D__SAMD21G18A__ -DUSB_PID_HIGH=0x00 -DUSB_PID_LOW=0x0B -DUSB_VID_LOW=0x9A -DUSB_VID_HIGH=0x23
+   NAME=feather_m0_samd21g18_sam_ba
+else ifeq ($(TARGET), METRO_M0)
+   # Adafruit Metro Zero (0x239A 0x0013)
+   CFLAGS_EXTRA?=-D__SAMD21G18A__ -DUSB_PID_HIGH=0x00 -DUSB_PID_LOW=0x13 -DUSB_VID_LOW=0x9A -DUSB_VID_HIGH=0x23
+   NAME=metro_m0_samd21g18_sam_ba
+else ifeq ($(TARGET), FEATHER_SAMR)
+   # Adafruit Feather SAMR (0x239A 0x0014)
+   CFLAGS_EXTRA?=-D__SAMR21G18A__ -DUSB_PID_HIGH=0x00 -DUSB_PID_LOW=0x14 -DUSB_VID_LOW=0x9A -DUSB_VID_HIGH=0x23
+   NAME=feather_samr_samr21g18_sam_ba
+else ifeq ($(TARGET), TRINKET_M0)
+   # Adafruit Trinket M0 (0x239A 0x0016), crystalless  *fix chipset*
+   CFLAGS_EXTRA?=-D__SAMD21G18A__ -DUSB_PID_HIGH=0x00 -DUSB_PID_LOW=0x16 -DUSB_VID_LOW=0x9A -DUSB_VID_HIGH=0x23 -DSTRING_MANUFACTURER="Adafruit Industries LLC" -DSTRING_PRODUCT="Adafruit Trinket M0"  -DCRYSTALLESS
+   NAME=trinket_m0_samd21g18_sam_ba
+else
+   # ???
+   $(error Unknown target, please edit makefile to select FEATHER_M0, METRO_M0, TRINKET_M0 or FEATHER_SAMR )
+endif
+
 # Arduino Zero (PID == 0x004D)
 # CFLAGS_EXTRA?=-D__SAMD21G18A__ -DUSB_PID_HIGH=0x00 -DUSB_PID_LOW=0x4D -DUSB_VID_LOW=0x41 -DUSB_VID_HIGH=0x23
 # Genuino Zero (PID == 0x024D)
@@ -81,8 +103,6 @@ CFLAGS_EXTRA?=-D__SAMR21G18A__ -DUSB_PID_HIGH=0x00 -DUSB_PID_LOW=0x14 -DUSB_VID_
 # Genuino MKR1000 (PID == 0x024E)
 # CFLAGS_EXTRA?=-D__SAMD21G18A__ -DUSB_PID_HIGH=0x02 -DUSB_PID_LOW=0x4E -DUSB_VID_LOW=0x41 -DUSB_VID_HIGH=0x23
 
-# samd or samr
-NAME=samr21_sam_ba
 
 INCLUDES=-I"$(MODULE_PATH)/tools/CMSIS/4.0.0-atmel/CMSIS/Include/" -I"$(MODULE_PATH)/tools/CMSIS/4.0.0-atmel/Device/ATMEL/"
 
