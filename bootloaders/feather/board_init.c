@@ -199,25 +199,6 @@ void board_init(void)
   ////////////////////////////////////////
   uint32_t temp_genctrl_config = 0;
 
-  // ENABLE OUTPUT OF GENCLK 0 on D2 (PA14)
-  // Write to the PINCFG register to enable the peripheral multiplexer
-  PORT->Group[0].PINCFG[14].reg = 1;
-  // Enable peripheral function H for PA14, refer chapter I/O Multiplexing in the device datasheet
-  PORT->Group[0].PMUX[7].bit.PMUXE = 7;
-
-  // ENABLE OUTPUT OF GENCLK 1 on D5 (PA15)
-  // Write to the PINCFG register to enable the peripheral multiplexer
-  PORT->Group[0].PINCFG[15].reg = 1;
-  // Enable peripheral function H for PA15, refer chapter I/O Multiplexing in the device datasheet
-  PORT->Group[0].PMUX[7].bit.PMUXO = 7;
-
-  // ENABLE OUTPUT OF GENCLK 2 on D11 (PA16) - should be OSC8M @ 8MHz
-  // Write to the PINCFG register to enable the peripheral multiplexer
-  PORT->Group[0].PINCFG[16].reg = 1;
-  // Enable peripheral function H for PA16, refer chapter I/O Multiplexing in the device datasheet
-  PORT->Group[0].PMUX[8].bit.PMUXE = 7;
-
-
   /////////////////////////////////////////////////
 
   /* Set OSC8M prescalar to divide by 1, now gclk0 is @ 8mhz */
@@ -250,7 +231,6 @@ void board_init(void)
   genctrl.bit.SRC = GCLK_GENCTRL_SRC_OSC32K_Val;     // gclk 1 is now = osc32k
   genctrl.bit.GENEN = 1;
   genctrl.bit.RUNSTDBY = 0;
-  genctrl.bit.OE = 1;                               // output on GCLK_IO[1] pin for debugging
 
   GCLK->GENCTRL.reg = (genctrl.reg | temp_genctrl); // set it!
 
@@ -266,7 +246,6 @@ void board_init(void)
   genctrl.bit.SRC = GCLK_GENCTRL_SRC_OSC8M_Val;     // gclk 2 is now = osc8m
   genctrl.bit.GENEN = 1;
   genctrl.bit.RUNSTDBY = 0;
-  genctrl.bit.OE = 1;                               // output on GCLK_IO[2] pin for debugging
   GCLK->GENCTRL.reg = (genctrl.reg | temp_genctrl); // set it!
 
   while(GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY);
@@ -319,7 +298,6 @@ void board_init(void)
   genctrl.bit.SRC = GCLK_GENCTRL_SRC_DFLL48M_Val;
   genctrl.bit.GENEN = 1;
   genctrl.bit.RUNSTDBY = 0;
-  genctrl.bit.OE = 1;
   GCLK->GENCTRL.reg = (genctrl.reg | temp_genctrl);
   while(GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY);
 
