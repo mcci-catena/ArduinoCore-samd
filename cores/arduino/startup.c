@@ -51,6 +51,7 @@ void SystemInit( void )
   /* Turn on the digital interface clock */
   PM->APBAMASK.reg |= PM_APBAMASK_GCLK ;
 
+#if !defined(CRYSTALLESS)
   /* ----------------------------------------------------------------------------------------------
    * 1) Enable XOSC32K clock (External on-board 32.768Hz oscillator)
    */
@@ -192,6 +193,118 @@ void SystemInit( void )
                       GCLK_GENCTRL_SRC_OSC8M | // Selected source is RC OSC 8MHz (already enabled at reset)
 //                      GCLK_GENCTRL_OE | // Output clock to a pin for tests
                       GCLK_GENCTRL_GENEN ;
+
+#else
+
+
+  /* Set OSC8M prescalar to divide by 1, now gclk0 is @ 8mhz */
+  SYSCTRL->OSC8M.bit.PRESC = 0;
+
+  /* ----------------------------------------------------------------------------------------------
+   * 1) Enable OSC32K clock (Internal 32.768Hz oscillator)
+   */
+  
+  uint32_t calib = (*((uint32_t *) SYSCTRL_FUSES_OSC32K_ADDR) & SYSCTRL_FUSES_OSC32K_Msk) >> SYSCTRL_FUSES_OSC32K_Pos;
+
+  SYSCTRL->OSC32K.reg = SYSCTRL_OSC32K_CALIB(calib) | SYSCTRL_OSC32K_STARTUP( 0x6u ) | // cf table 15.10 of product datasheet in chapter 15.8.6 
+    SYSCTRL_OSC32K_EN32K | SYSCTRL_OSC32K_ENABLE;
+
+  while ( (SYSCTRL->PCLKSR.reg & SYSCTRL_PCLKSR_OSC32KRDY) == 0 ); // Wait for oscillator stabilization 
+
+  /* ----------------------------------------------------------------------------------------------
+   * 2) Put OSC32K as source of Generic Clock Generator 1
+   */
+
+  GCLK_GENCTRL_Type genctrl={0};
+  uint32_t temp_genctrl;
+
+  GCLK->GENCTRL.bit.ID = 1; // Read GENERATOR_ID - GCLK_GEN_1
+  
+  while(GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY); // wait for data to be ready
+
+  temp_genctrl = GCLK->GENCTRL.reg;
+  genctrl.bit.SRC = GCLK_GENCTRL_SRC_OSC32K_Val;     // gclk 1 is now = osc32k
+  genctrl.bit.GENEN = 1;
+  genctrl.bit.RUNSTDBY = 0;
+  genctrl.bit.OE = 1;                               // output on GCLK_IO[1] pin for debugging
+
+  GCLK->GENCTRL.reg = (genctrl.reg | temp_genctrl); // set it!
+
+  while(GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY);
+
+
+  /* Configure OSC8M as source for GCLK_GEN 2 */
+  GCLK->GENCTRL.bit.ID = 2; // Read GENERATOR_ID - GCLK_GEN_2 
+  
+  while(GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY); // wait for data to be ready
+  
+  temp_genctrl = GCLK->GENCTRL.reg;
+  genctrl.bit.SRC = GCLK_GENCTRL_SRC_OSC8M_Val;     // gclk 2 is now = osc8m
+  genctrl.bit.GENEN = 1;
+  genctrl.bit.RUNSTDBY = 0;
+  genctrl.bit.OE = 1;                               // output on GCLK_IO[2] pin for debugging
+  GCLK->GENCTRL.reg = (genctrl.reg | temp_genctrl); // set it!
+
+  while(GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY);
+
+
+#define NVM_SW_CALIB_DFLL48M_COARSE_VAL   58
+#define NVM_SW_CALIB_DFLL48M_FINE_VAL 64
+
+  // Turn on DFLL
+  SYSCTRL_DFLLCTRL_Type dfllctrl_conf = {0};
+  SYSCTRL_DFLLVAL_Type dfllval_conf = {0};
+  uint32_t coarse =( *((uint32_t *)(NVMCTRL_OTP4)
+		       + (NVM_SW_CALIB_DFLL48M_COARSE_VAL / 32))
+		     >> (NVM_SW_CALIB_DFLL48M_COARSE_VAL % 32))
+    & ((1 << 6) - 1);
+  if (coarse == 0x3f) {
+    coarse = 0x1f;
+  }
+  uint32_t fine =( *((uint32_t *)(NVMCTRL_OTP4)
+		     + (NVM_SW_CALIB_DFLL48M_FINE_VAL / 32))
+		   >> (NVM_SW_CALIB_DFLL48M_FINE_VAL % 32))
+    & ((1 << 10) - 1);
+  if (fine == 0x3ff) {
+    fine = 0x1ff;
+  }
+  dfllval_conf.bit.COARSE  = coarse;
+  dfllval_conf.bit.FINE    = fine;
+  dfllctrl_conf.bit.USBCRM = 1;  // usb correction
+  dfllctrl_conf.bit.BPLCKC = 0;
+  dfllctrl_conf.bit.QLDIS  = 0;
+  dfllctrl_conf.bit.CCDIS  = 1;
+  dfllctrl_conf.bit.ENABLE = 1;
+
+  SYSCTRL->DFLLCTRL.bit.ONDEMAND = 0;
+  while (!(SYSCTRL->PCLKSR.reg & SYSCTRL_PCLKSR_DFLLRDY));
+  SYSCTRL->DFLLMUL.reg = 48000;
+  SYSCTRL->DFLLVAL.reg = dfllval_conf.reg;
+  SYSCTRL->DFLLCTRL.reg = dfllctrl_conf.reg;
+  
+  //
+  GCLK_CLKCTRL_Type clkctrl={0};
+  uint16_t temp;
+  GCLK->CLKCTRL.bit.ID = 2; // GCLK_ID - DFLL48M Reference 
+  temp = GCLK->CLKCTRL.reg;
+  clkctrl.bit.CLKEN = 1;
+  clkctrl.bit.WRTLOCK = 0;
+  clkctrl.bit.GEN = GCLK_CLKCTRL_GEN_GCLK0_Val;
+  GCLK->CLKCTRL.reg = (clkctrl.reg | temp);
+
+  // Configure DFLL48M as source for GCLK_GEN 0
+  GCLK->GENCTRL.bit.ID = 0; // GENERATOR_ID - GCLK_GEN_0
+  while(GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY);
+  temp_genctrl = GCLK->GENCTRL.reg;
+  genctrl.bit.SRC = GCLK_GENCTRL_SRC_DFLL48M_Val;
+  genctrl.bit.GENEN = 1;
+  genctrl.bit.RUNSTDBY = 0;
+  genctrl.bit.OE = 1;
+  GCLK->GENCTRL.reg = (genctrl.reg | temp_genctrl);
+  while(GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY);
+
+
+#endif
 
   while ( GCLK->STATUS.reg & GCLK_STATUS_SYNCBUSY )
   {
