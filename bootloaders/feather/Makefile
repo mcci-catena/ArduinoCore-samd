@@ -87,8 +87,8 @@ else ifeq ($(TARGET), FEATHER_SAMR)
    NAME=feather_samr_samr21g18_sam_ba
 else ifeq ($(TARGET), TRINKET_M0)
    # Adafruit Trinket M0 (0x239A 0x0016), crystalless  *fix chipset*
-   CFLAGS_EXTRA?=-D__SAMD21G18A__ -DUSB_PID_HIGH=0x00 -DUSB_PID_LOW=0x16 -DUSB_VID_LOW=0x9A -DUSB_VID_HIGH=0x23 -DSTRING_MANUFACTURER="Adafruit Industries LLC" -DSTRING_PRODUCT="Adafruit Trinket M0"  -DCRYSTALLESS
-   NAME=trinket_m0_samd21g18_sam_ba
+   CFLAGS_EXTRA?=-D__SAMD21E18A__ -DUSB_PID_HIGH=0x00 -DUSB_PID_LOW=0x16 -DUSB_VID_LOW=0x9A -DUSB_VID_HIGH=0x23 -DSTRING_MANUFACTURER="Adafruit Industries LLC" -DSTRING_PRODUCT="Adafruit Trinket M0"  -DCRYSTALLESS -DSAM_BA_INTERFACE=SAM_BA_USBCDC_ONLY
+   NAME=trinket_m0_samd21e18_sam_ba
 else
    # ???
    $(error Unknown target, please edit makefile to select FEATHER_M0, METRO_M0, TRINKET_M0 or FEATHER_SAMR )

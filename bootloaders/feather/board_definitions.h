@@ -60,6 +60,8 @@
 /*
  * LEDs definitions
  */
+
+#if defined(__SAMR21G18A__) || defined(__SAMD21G18A__)
 #define BOARD_LED_PORT                    (0)
 #define BOARD_LED_PIN                     (17)
 
@@ -68,5 +70,18 @@
 
 #define BOARD_LEDTX_PORT                  (0)
 #define BOARD_LEDTX_PIN                   (27)
+
+#elif  defined(__SAMD21E18A__)
+
+#define BOARD_LED_PORT                    (0)  // PA28
+#define BOARD_LED_PIN                     (28)
+
+#define BOARD_LEDRX_PORT                  (0) // PA00
+#define BOARD_LEDRX_PIN                   (0)
+
+#define BOARD_LEDTX_PORT                  (0) // PA01
+#define BOARD_LEDTX_PIN                   (1)
+
+#endif
 
 #endif // _BOARD_DEFINITIONS_H_
