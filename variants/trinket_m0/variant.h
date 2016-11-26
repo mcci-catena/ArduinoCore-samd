@@ -132,7 +132,7 @@ static const uint8_t ATN = PIN_ATN;
 #define PIN_SPI_MISO         (3u) // PA09
 #define PIN_SPI_MOSI         (1u) // PA10
 #define PIN_SPI_SCK          (0u) // PA11
-#define PERIPH_SPI           sercom2
+#define PERIPH_SPI           sercom3
 #define PAD_SPI_TX           SPI_PAD_2_SCK_3
 #define PAD_SPI_RX           SERCOM_RX_PAD_1
 
@@ -142,7 +142,7 @@ static const uint8_t MISO = PIN_SPI_MISO ;
 static const uint8_t SCK  = PIN_SPI_SCK ;
 
 /*
- * Wire Interfaces (sercom 2 so can share with sercom 0)
+ * Wire Interfaces (sercom 2 so can share with Serial1 on sercom 0)
  */
 #define WIRE_INTERFACES_COUNT 1
 
@@ -150,6 +150,7 @@ static const uint8_t SCK  = PIN_SPI_SCK ;
 #define PIN_WIRE_SCL         (3u) // PA09
 #define PERIPH_WIRE          sercom2
 #define WIRE_IT_HANDLER      SERCOM2_Handler
+ 
 
 static const uint8_t SDA = PIN_WIRE_SDA;
 static const uint8_t SCL = PIN_WIRE_SCL;
