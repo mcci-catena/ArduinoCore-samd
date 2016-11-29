@@ -16,9 +16,9 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
-# pick: FEATHER_M0, METRO_M0, FEATHER_SAMR, GEMMA_M0, TRINKET_M0
+# pick: FEATHER_M0, METRO_M0, FEATHER_SAMR, GEMMA_M0, TRINKET_M0, CPLAY_EXPRESS
 
-TARGET=TRINKET_M0
+TARGET=CPLAY_EXPRESS
 
 # -----------------------------------------------------------------------------
 # Paths
@@ -86,9 +86,13 @@ else ifeq ($(TARGET), FEATHER_SAMR)
    CFLAGS_EXTRA?=-D__SAMR21G18A__ -DUSB_PID_HIGH=0x00 -DUSB_PID_LOW=0x14 -DUSB_VID_LOW=0x9A -DUSB_VID_HIGH=0x23
    NAME=feather_samr_samr21g18_sam_ba
 else ifeq ($(TARGET), TRINKET_M0)
-   # Adafruit Trinket M0 (0x239A 0x0016), crystalless  *fix chipset*
+   # Adafruit Trinket M0 (0x239A 0x0016), crystalless
    CFLAGS_EXTRA?=-D__SAMD21E18A__ -DUSB_PID_HIGH=0x00 -DUSB_PID_LOW=0x16 -DUSB_VID_LOW=0x9A -DUSB_VID_HIGH=0x23 -DSTRING_MANUFACTURER="Adafruit Industries LLC" -DSTRING_PRODUCT="Adafruit Trinket M0"  -DCRYSTALLESS -DSAM_BA_INTERFACE=SAM_BA_USBCDC_ONLY
    NAME=trinket_m0_samd21e18_sam_ba
+else ifeq ($(TARGET), CPLAY_EXPRESS)
+   # Adafruit Circuit Playground M0 Express (0x239A 0x0018), crystalless
+   CFLAGS_EXTRA?=-D__SAMD21G18A__ -DUSB_PID_HIGH=0x00 -DUSB_PID_LOW=0x18 -DUSB_VID_LOW=0x9A -DUSB_VID_HIGH=0x23 -DSTRING_MANUFACTURER="Adafruit Industries LLC" -DSTRING_PRODUCT="Adafruit Circuit Playground Express"  -DCRYSTALLESS -DSAM_BA_INTERFACE=SAM_BA_USBCDC_ONLY
+   NAME=circuitplay_m0_samd21g18_sam_ba
 else
    # ???
    $(error Unknown target, please edit makefile to select FEATHER_M0, METRO_M0, TRINKET_M0 or FEATHER_SAMR )
