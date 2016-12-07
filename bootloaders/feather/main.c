@@ -26,6 +26,11 @@
 #include "sam_ba_usb.h"
 #include "sam_ba_cdc.h"
 
+
+void pulse_led(int8_t speed) ;
+#define ENUMERATION_TIMEOUT 2000000
+uint32_t enum_timeout_counter;
+
 extern uint32_t __sketch_vectors_ptr; // Exported value from linker script
 extern void board_init(void);
 
@@ -181,6 +186,7 @@ int main(void)
 
   LED_on();
 
+  enum_timeout_counter = ENUMERATION_TIMEOUT;
   /* Wait for a complete enum on usb or a '#' char on serial line */
   while (1)
   {
@@ -195,11 +201,78 @@ int main(void)
     /* Check if a USB enumeration has succeeded and if comm port has been opened */
     if (main_b_cdc_enable)
     {
+#if defined(BOARD_RGBLED_CLOCK_PORT)
+      APA102_set_color(25, 0, 0);
+      // set clock port low for 100ms
+      for (uint32_t i=0; i<1000000; i++) /* 100ms */
+	__asm__ __volatile__("");
+      APA102_set_color(0, 25, 0);
+      // set clock port low for 100ms
+      for (uint32_t i=0; i<1000000; i++) /* 100ms */
+	__asm__ __volatile__("");
+      APA102_set_color(0, 0, 25);
+      // set clock port low for 100ms
+      for (uint32_t i=0; i<1000000; i++) /* 100ms */
+	__asm__ __volatile__("");
+
+      //enumration == pale white
+      APA102_set_color(25,25,25);
+#endif
       sam_ba_monitor_init(SAM_BA_INTERFACE_USBCDC);
       /* SAM-BA on USB loop */
       while( 1 )
       {
         sam_ba_monitor_run();
+      }
+    } else {
+      if (enum_timeout_counter != 0) {
+	enum_timeout_counter--;
+      } else {
+	// try to bail to sketch on enumeration timeout
+
+	uint32_t* pulSketch_Start_Address;
+	if (__sketch_vectors_ptr != 0xFFFFFFFF) {
+	  /*
+	   * Load the sketch Reset Handler address
+	   * __sketch_vectors_ptr is exported from linker script and point on first 32b word of sketch vector table
+	   * First 32b word is sketch stack
+	   * Second 32b word is sketch entry point: Reset_Handler()
+	   */
+	  pulSketch_Start_Address = &__sketch_vectors_ptr ;
+	  pulSketch_Start_Address++ ;
+
+	  /*
+	   * Test vector table address of sketch @ &__sketch_vectors_ptr
+	   * Stay in SAM-BA if this function is not aligned enough, ie not valid
+	   */
+	  if ( ((uint32_t)(&__sketch_vectors_ptr) & ~SCB_VTOR_TBLOFF_Msk) == 0x00)
+	    {
+	      LED_on();
+	      
+	      /* Rebase the Stack Pointer */
+	      __set_MSP( (uint32_t)(__sketch_vectors_ptr) );
+	      
+	      /* Rebase the vector table base address */
+	      SCB->VTOR = ((uint32_t)(&__sketch_vectors_ptr) & SCB_VTOR_TBLOFF_Msk);
+	      
+	      /* Jump to application Reset Handler in the application */
+	      asm("bx %0"::"r"(*pulSketch_Start_Address));
+	    }
+	}
+
+	// no sketch & timed out!
+#if defined(BOARD_RGBLED_CLOCK_PORT)
+	APA102_set_color(25,0,0);
+#endif
+	LED_off();
+	for (uint32_t i=0; i<5000000; i++) /* 100ms */
+	  __asm__ __volatile__("");
+#if defined(BOARD_RGBLED_CLOCK_PORT)
+	APA102_set_color(0,0,0);
+#endif
+	LED_on();
+	for (uint32_t i=0; i<5000000; i++) /* 100ms */
+	  __asm__ __volatile__("");
       }
     }
 #endif
@@ -242,6 +315,6 @@ void pulse_led(int8_t speed) {
     }
     LED_on();
   }
-  if (pulse_tick==pulse_pwm) 
+  if (pulse_tick==pulse_pwm)
     LED_off();
 }

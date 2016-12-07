@@ -73,8 +73,8 @@
 
 #elif  defined(__SAMD21E18A__)
 
-#define BOARD_LED_PORT                    (0)  // PA28
-#define BOARD_LED_PIN                     (28)
+#define BOARD_LED_PORT                    (0)  // PA17
+#define BOARD_LED_PIN                     (17)
 
 #define BOARD_LEDRX_PORT                  (0) // PA00
 #define BOARD_LEDRX_PIN                   (0)
@@ -82,6 +82,10 @@
 #define BOARD_LEDTX_PORT                  (0) // PA01
 #define BOARD_LEDTX_PIN                   (1)
 
+#define BOARD_RGBLED_CLOCK_PORT           (0) // PA
+#define BOARD_RGBLED_CLOCK_PIN            (5) // 05
+#define BOARD_RGBLED_DATA_PORT            (0) // PA
+#define BOARD_RGBLED_DATA_PIN             (4) // 04
 #endif
 
 #endif // _BOARD_DEFINITIONS_H_

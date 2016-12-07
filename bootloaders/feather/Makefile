@@ -18,7 +18,7 @@
 
 # pick: FEATHER_M0, METRO_M0, FEATHER_SAMR, GEMMA_M0, TRINKET_M0, CPLAY_EXPRESS
 
-TARGET=CPLAY_EXPRESS
+TARGET=TRINKET_M0
 
 # -----------------------------------------------------------------------------
 # Paths
