@@ -36,6 +36,13 @@ extern "C" {
 extern uint32_t millis( void ) ;
 
 /**
+ * \brief Slews the number of milliseconds forward the next time an interrupt occurs.
+ *
+ * This number will overflow (go back to zero), after approximately 50 days.
+ */
+extern void adjust_millis_forward( uint32_t uAdjust ) ;
+
+/**
  * \brief Returns the number of microseconds since the Arduino board began running the current program.
  *
  * This number will overflow (go back to zero), after approximately 70 minutes. On 16 MHz Arduino boards
