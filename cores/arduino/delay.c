@@ -25,7 +25,7 @@ extern "C" {
 
 /** Tick Counter united by ms */
 static volatile uint32_t _ulTickCount=0 ;
-static volatile uint32_t _ulTickAdjust=0;
+
 uint32_t millis( void )
 {
 // todo: ensure no interrupts
@@ -104,11 +104,7 @@ void delay( uint32_t ms )
 void SysTick_DefaultHandler(void)
 {
   // Increment tick count each ms
-  uint32_t ulTickAdjust = _ulTickAdjust;
-
-  _ulTickCount = _ulTickCount + ulTickAdjust + 1;
-  if (ulTickAdjust != 0)
-    _ulTickAdjust = 0;
+  _ulTickCount++;
   tickReset();
 }
 
