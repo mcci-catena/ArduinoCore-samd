@@ -36,11 +36,15 @@ extern "C" {
 extern uint32_t millis( void ) ;
 
 /**
- * \brief Slews the number of milliseconds forward the next time an interrupt occurs.
+ * \brief Atomically adjust the millis() clock forward.
  *
- * This number will overflow (go back to zero), after approximately 50 days.
+ * \param delta is the value to add to the clock (uint32_t)
+ *
+ * \return New value of the millis() clock.
+ *
+ * \note See also millis(). Overflows are ignored.
  */
-extern void adjust_millis_forward( uint32_t uAdjust ) ;
+extern uint32_t adjust_millis_forward( uint32_t );
 
 /**
  * \brief Returns the number of microseconds since the Arduino board began running the current program.
