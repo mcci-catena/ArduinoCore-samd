@@ -62,47 +62,22 @@ void attachInterrupt(uint32_t pin, voidFuncPtr callback, uint32_t mode)
 #else
   EExt_Interrupts in = digitalPinToInterrupt(pin);
 #endif
-  if (in == NOT_AN_INTERRUPT) return;
+  if (in == NOT_AN_INTERRUPT || in == EXTERNAL_INT_NMI)
+    return;
 
   if (!enabled) {
     __initialize();
     enabled = 1;
   }
 
-  if (in == EXTERNAL_INT_NMI) {
-    EIC->NMIFLAG.bit.NMI = 1; // Clear flag
-    switch (mode) {
-      case LOW:
-        EIC->NMICTRL.bit.NMISENSE = EIC_NMICTRL_NMISENSE_LOW;
-        break;
-
-      case HIGH:
-        EIC->NMICTRL.bit.NMISENSE = EIC_NMICTRL_NMISENSE_HIGH;
-        break;
-
-      case CHANGE:
-        EIC->NMICTRL.bit.NMISENSE = EIC_NMICTRL_NMISENSE_BOTH;
-        break;
-
-      case FALLING:
-        EIC->NMICTRL.bit.NMISENSE = EIC_NMICTRL_NMISENSE_FALL;
-        break;
-
-      case RISING:
-        EIC->NMICTRL.bit.NMISENSE = EIC_NMICTRL_NMISENSE_RISE;
-        break;
-    }
-
-    // Assign callback to interrupt
-    callbacksInt[EXTERNAL_INT_NMI] = callback;
-
-  } else { // Not NMI, is external interrupt
-
     // Enable wakeup capability on pin in case being used during sleep
     EIC->WAKEUP.reg |= (1 << in);
 
     // Assign pin to EIC
     pinPeripheral(pin, PIO_EXTINT);
+
+  // Assign callback to interrupt
+  callbacksInt[in] = callback;
 
     // Look for right CONFIG register to be addressed
     if (in > EXTERNAL_INT_7) {
@@ -138,10 +113,6 @@ void attachInterrupt(uint32_t pin, voidFuncPtr callback, uint32_t mode)
 
     // Enable the interrupt
     EIC->INTENSET.reg = EIC_INTENSET_EXTINT(1 << in);
-
-    // Assign callback to interrupt
-    callbacksInt[in] = callback;
-  }
 }
 
 /*
@@ -154,17 +125,14 @@ void detachInterrupt(uint32_t pin)
 #else
   EExt_Interrupts in = digitalPinToInterrupt(pin);
 #endif 
-  if (in == NOT_AN_INTERRUPT) return;
+  if (in == NOT_AN_INTERRUPT || in == EXTERNAL_INT_NMI)
+    return;
 
-  if(in == EXTERNAL_INT_NMI) {
-    EIC->NMICTRL.bit.NMISENSE = 0; // Turn off detection
-  } else {
     EIC->INTENCLR.reg = EIC_INTENCLR_EXTINT(1 << in);
   
     // Disable wakeup capability on pin during sleep
     EIC->WAKEUP.reg &= ~(1 << in);
   }
-}
 
 /*
  * External Interrupt Controller NVIC Interrupt Handler
@@ -185,13 +153,4 @@ void EIC_Handler(void)
       EIC->INTFLAG.reg = 1 << i;
     }
   }
-}
-
-/*
- * NMI Interrupt Handler
- */
-void NMI_Handler(void)
-{
-  if (callbacksInt[EXTERNAL_INT_NMI]) callbacksInt[EXTERNAL_INT_NMI]();
-  EIC->NMIFLAG.bit.NMI = 1; // Clear interrupt
 }
