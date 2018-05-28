@@ -1,23 +1,27 @@
-# Arduino Core for SAMD21 CPU
+# Arduino Core for MCCI Catena IoT Nodes based on the SAMD21 CPU
 
 This repository contains the source code and configuration files of the Arduino Core
-for Atmel's SAMD21 processor (used on the Arduino/Genuino Zero, MKR1000 and MKRZero boards).
-
-In particular, this adds support for the Adafruit SAMD Boards such as the Feather M0
+for MCCI Catena IoT devices.  It is based on the Arduino core 
+for Atmel's SAMD21 processor (used on the Arduino/Genuino Zero, MKR1000 and MKRZero boards),
+as extended by Adafruit for their SAMD Boards such as the Feather M0.
 
 ## Installation on Arduino IDE
 
-Install the Adafruit Board Support package json and then install the Adafruit SAMD board package
+Simply install the package following the instructions given here:
 
-https://learn.adafruit.com/adafruit-feather-m0-basic-proto/using-with-arduino-ide
+https://github.com/mcci-catena/arduino-boards/blob/master/README.md
 
 ## Bugs or Issues
 
 If you find a bug you can submit an issue here on github:
 
-https://github.com/adafruit/ArduinoCore-samd
+https://github.com/mcci-catena/ArduinoCore-samd
 
 or if it is an issue with the upstream:
+
+https://github.com/adafruit/ArduinoCore-samd
+
+or
 
 https://github.com/arduino/ArduinoCore-samd/issues
 
@@ -26,10 +30,13 @@ to avoid duplicates.
 
 ## License and credits
 
-This core has been developed by Arduino LLC in collaboration with Atmel.
+This core has been developed by Arduino LLC in collaboration with Atmel. The copyright notice doesn't
+include Adafruit, but we think it probably should.
 
 ```
-  Copyright (c) 2015 Arduino LLC.  All right reserved.
+  Copyright (c) 2015 Arduino LLC.  All rights reserved.
+  Portions copyright (c) Adafruit Industries.
+  Portions copyright (c) 2017-2018 MCCI Corporation.
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
