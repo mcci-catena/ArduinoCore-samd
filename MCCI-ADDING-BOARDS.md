@@ -12,8 +12,6 @@ The following template should be used as a starting point for adding a board.
 # See template in https://github.com/mcci-catena/ArduinoCore-samd/MCCI-ADDING-BOARDS.md
 #
 {{board}}.name=Catena {{modelnumber}}
-{{board}}.vid.0=0x040E
-{{board}}.pid.0=0x{{pid}}
 {{board}}.upload.tool=bossac
 {{board}}.upload.protocol=sam-ba
 {{board}}.upload.maximum_size=262144

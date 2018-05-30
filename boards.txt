@@ -12,8 +12,6 @@ menu.lorawan_region=LoRaWAN Region
 # See template in https://github.com/mcci-catena/ArduinoCore-samd/MCCI-ADDING-BOARDS.md
 #
 mcci_catena_4410.name=Catena 4410
-mcci_catena_4410.vid.0=0x040E
-mcci_catena_4410.pid.0=0x0018
 mcci_catena_4410.upload.tool=bossac
 mcci_catena_4410.upload.protocol=sam-ba
 mcci_catena_4410.upload.maximum_size=262144
@@ -59,8 +57,6 @@ mcci_catena_4410.menu.lorawan_region.projcfg.build.lorawan_flags=
 # See template in https://github.com/mcci-catena/ArduinoCore-samd/MCCI-ADDING-BOARDS.md
 #
 mcci_catena_4420.name=Catena 4420
-mcci_catena_4420.vid.0=0x040E
-mcci_catena_4420.pid.0=0x0018
 mcci_catena_4420.upload.tool=bossac
 mcci_catena_4420.upload.protocol=sam-ba
 mcci_catena_4420.upload.maximum_size=262144
@@ -106,8 +102,6 @@ mcci_catena_4420.menu.lorawan_region.projcfg.build.lorawan_flags=
 # See template in https://github.com/mcci-catena/ArduinoCore-samd/MCCI-ADDING-BOARDS.md
 #
 mcci_catena_4450.name=Catena 4450
-mcci_catena_4450.vid.0=0x040E
-mcci_catena_4450.pid.0=0x0019
 mcci_catena_4450.upload.tool=bossac
 mcci_catena_4450.upload.protocol=sam-ba
 mcci_catena_4450.upload.maximum_size=262144
@@ -153,8 +147,6 @@ mcci_catena_4450.menu.lorawan_region.projcfg.build.lorawan_flags=
 # See template in https://github.com/mcci-catena/ArduinoCore-samd/MCCI-ADDING-BOARDS.md
 #
 mcci_catena_4460.name=Catena 4460
-mcci_catena_4460.vid.0=0x040E
-mcci_catena_4460.pid.0=0x001A
 mcci_catena_4460.upload.tool=bossac
 mcci_catena_4460.upload.protocol=sam-ba
 mcci_catena_4460.upload.maximum_size=262144
@@ -200,8 +192,6 @@ mcci_catena_4460.menu.lorawan_region.projcfg.build.lorawan_flags=
 # See template in https://github.com/mcci-catena/ArduinoCore-samd/MCCI-ADDING-BOARDS.md
 #
 mcci_catena_4470.name=Catena 4470
-mcci_catena_4470.vid.0=0x040E
-mcci_catena_4470.pid.0=0x001A
 mcci_catena_4470.upload.tool=bossac
 mcci_catena_4470.upload.protocol=sam-ba
 mcci_catena_4470.upload.maximum_size=262144
