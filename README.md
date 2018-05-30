@@ -1,7 +1,7 @@
 # Arduino Core for MCCI Catena&reg; IoT Nodes based on the SAMD21 CPU
 
 This repository contains the source code and configuration files of the Arduino Core
-for MCCI Catena IoT devices.  It is based on the Arduino core 
+for MCCI Catena IoT devices.  It is based on the Arduino core
 for Atmel's SAMD21 processor (used on the Arduino/Genuino Zero, MKR1000 and MKRZero boards),
 as extended by Adafruit for their SAMD Boards such as the Feather M0.
 
