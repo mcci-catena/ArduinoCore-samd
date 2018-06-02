@@ -20,7 +20,7 @@ The following template should be used as a starting point for adding a board.
 {{board}}.upload.native_usb=true
 {{board}}.build.mcu=cortex-m0plus
 {{board}}.build.f_cpu=48000000L
-{{board}}.build.usb_product="Catena {{modelnumber}}"
+{{board}}.build.usb_product="MCCI Catena {{modelnumber}}"
 {{board}}.build.usb_manufacturer="MCCI Corporation"
 {{board}}.build.board=MCCI_CATENA_{{modelnumber}}
 {{board}}.build.core=arduino
