@@ -46,7 +46,7 @@ The following template should be used as a starting point for adding a board.
 {{board}}.menu.lorawan_region.eu868.build.lorawan_flags=-DCFG_eu868=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
 {{board}}.menu.lorawan_region.au921.build.lorawan_flags=-DCFG_au921=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
 {{board}}.menu.lorawan_region.as923.build.lorawan_flags=-DCFG_as923=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
-{{board}}.menu.lorawan_region.as923jp.build.lorawan_flags=-DCFG_as923=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
+{{board}}.menu.lorawan_region.as923jp.build.lorawan_flags=-DCFG_as923=1 -DLMIC_COUNTRY_CODE=LMIC_COUNTRY_CODE_JP -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
 {{board}}.menu.lorawan_region.in866.build.lorawan_flags=-DCFG_in866=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
 {{board}}.menu.lorawan_region.projcfg.build.lorawan_flags=
 
