@@ -29,6 +29,14 @@ static volatile uint32_t _ulTickCount=0 ;
 uint32_t millis( void )
 {
 // todo: ensure no interrupts
+  if (__get_PRIMASK())
+  {
+    if (SCB->ICSR & SCB_ICSR_PENDSTSET_Msk)
+    {
+      SCB->ICSR = SCB_ICSR_PENDSTCLR_Msk; // clear interrupt
+      ++_ulTickCount;
+    }
+  }
   return _ulTickCount ;
 }
 
@@ -67,7 +75,7 @@ uint32_t micros( void )
 
   ticks2  = SysTick->VAL;
   pend2   = !!(SCB->ICSR & SCB_ICSR_PENDSTSET_Msk)  ;
-  count2  = _ulTickCount ;
+  count2  = millis() ;
 
   do
   {
@@ -76,7 +84,7 @@ uint32_t micros( void )
     count=count2;
     ticks2  = SysTick->VAL;
     pend2   = !!(SCB->ICSR & SCB_ICSR_PENDSTSET_Msk)  ;
-    count2  = _ulTickCount ;
+    count2  = millis() ;
   } while ((pend != pend2) || (count != count2) || (ticks < ticks2));
 
   return ((count+pend) * 1000) + (((SysTick->LOAD  - ticks)*(1048576/(VARIANT_MCK/1000000)))>>20) ;
@@ -91,12 +99,12 @@ void delay( uint32_t ms )
     return ;
   }
 
-  uint32_t start = _ulTickCount ;
+  uint32_t start = millis() ;
 
   do
   {
     yield() ;
-  } while ( _ulTickCount - start < ms ) ;
+  } while ( millis() - start < ms ) ;
 }
 
 #include "Reset.h" // for tickReset()
