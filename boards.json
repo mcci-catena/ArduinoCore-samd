@@ -1,0 +1,39 @@
+{
+	"defaults":
+		{
+		"board":		"mcci_catena_{{modelnumber}}",
+		"name": 		"MCCI Catena {{modelnumber}}",
+		"vid": 			"040E",
+		"build_board": 		"MCCI_CATENA_{{modelnumber}}",
+		"build_variant": 	"feather_m0_express",
+		"build_variant_extra_flags": ""
+		},
+	"boards":
+		[
+			{
+			"modelnumber": 	"4410",
+			"pid": 		"0021",
+			"build_variant": "arduino_zero"
+			},
+
+			{
+			"modelnumber": 	"4420",
+			"pid": 		"0061",
+			"build_variant": "arduino_zero"
+			},
+
+			{
+			"modelnumber": 	"4450",
+			"pid": 		"0031"
+			},
+			{
+			"modelnumber": 	"4460",
+			"pid": 		"0051"
+			},
+			
+			{
+			"modelnumber": 	"4470",
+			"pid":		"0071"
+			}
+		]
+}
