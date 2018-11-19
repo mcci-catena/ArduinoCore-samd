@@ -54,6 +54,7 @@ compiler.readelf.cmd=arm-none-eabi-readelf
 
 # this can be overriden in boards.txt
 build.extra_flags=
+build.extra_library_flags=
 
 # These can be overridden in platform.local.txt
 compiler.c.extra_flags=
