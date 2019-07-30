@@ -1,6 +1,7 @@
 /*
   Arduino.h - Main include file for the Arduino SDK
   Copyright (c) 2014 Arduino LLC.  All right reserved.
+  Copyright 2019 MCCI Corporation. All rights reserved.
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -19,6 +20,25 @@
 
 #ifndef Arduino_h
 #define Arduino_h
+
+// MCCI Arduino Version
+#define _mcci_arduino_version_calc(major, minor, patch, local)	\
+	(((major) << 24u) | ((minor) << 16u) | ((patch) << 8u) | (local))
+
+#define	_mcci_arduino_version	_mcci_arduino_version_calc(1, 3, 1, 1)	/* v1.3.1.1 */
+
+#define	_mcci_arduino_version_get_major(v)	\
+	(((v) >> 24u) & 0xFFu)
+
+#define	_mcci_arduino_version_get_minor(v)	\
+	(((v) >> 16u) & 0xFFu)
+
+#define	_mcci_arduino_version_get_patch(v)	\
+	(((v) >> 8u) & 0xFFu)
+
+#define	_mcci_arduino_version_get_local(v)	\
+	((v) & 0xFFu)
+// end MCCI Arduino Version
 
 #include <stdbool.h>
 #include <stdint.h>
