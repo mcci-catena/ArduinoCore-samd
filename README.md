@@ -3,11 +3,14 @@
 This repository contains the source code and configuration files of the Arduino Core
 for MCCI Catena IoT devices.  It is based on the Arduino core
 for Atmel's SAMD21 processor (used on the Arduino/Genuino Zero, MKR1000 and MKRZero boards),
-as extended by Adafruit for their SAMD Boards such as the Feather M0.
+as extended by Adafruit for their SAMD Boards such as the Feather M0, and further extended by MCCI to support its MCCI Catena&reg; LoRaWAN&reg; technology boards.
 
-[![GitHub release](https://img.shields.io/github/release/mcci-catena/ArduinoCore-samd.svg)](https://github.com/mcci-catena/ArduinoCore-samd/releases/latest) [![GitHub commits](https://img.shields.io/github/commits-since/mcci-catena/ArduinoCore-samd/latest.svg)](https://github.com/mcci-catena/ArduinoCore-samd/compare/v1.2.0...master)
+[![GitHub release](https://img.shields.io/github/release/mcci-catena/ArduinoCore-samd.svg)](https://github.com/mcci-catena/ArduinoCore-samd/releases/latest) [![GitHub commits](https://img.shields.io/github/commits-since/mcci-catena/ArduinoCore-samd/latest.svg)](https://github.com/mcci-catena/ArduinoCore-samd/compare/v2.0.0...master)
 
 **Contents:**
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 <!-- TOC depthFrom:2 updateOnSave:true -->
 
 - [Installing this Package](#installing-this-package)
@@ -18,8 +21,11 @@ as extended by Adafruit for their SAMD Boards such as the Feather M0.
 - [License and credits](#license-and-credits)
 	- [LGPL License](#lgpl-license)
 	- [Trademark Acknowledgements](#trademark-acknowledgements)
+	- [Support Open-Source Software, Hardware, and Community IoT](#support-open-source-software-hardware-and-community-iot)
 
 <!-- /TOC -->
+<!-- markdownlint-restore -->
+<!-- Due to a bug in Markdown TOC, the table is formatted incorrectly if tab indentation is set other than 4. Due to another bug, this comment must be *after* the TOC entry. -->
 
 ## Installing this Package
 
@@ -27,7 +33,7 @@ as extended by Adafruit for their SAMD Boards such as the Feather M0.
 
 The easy approach is to install the package following the instructions given here:
 
-https://github.com/mcci-catena/arduino-boards/blob/master/README.md
+[https://github.com/mcci-catena/arduino-boards/blob/master/README.md](https://github.com/mcci-catena/arduino-boards/blob/master/README.md)
 
 However, if you need to development, it's more complicated. See the following section.
 
@@ -68,20 +74,18 @@ Remember to restart the IDE whenever you change `platform.txt`, `boards.txt` or 
 
 If you find a bug you can submit an issue here on github:
 
-https://github.com/mcci-catena/ArduinoCore-samd/issues
-
-or if it is an issue with the upstream:
-
-https://github.com/adafruit/ArduinoCore-samd/issues
-
-or
-
-https://github.com/arduino/ArduinoCore-samd/issues
+[github.com/mcci-catena/ArduinoCore-samd/issues](https://github.com/mcci-catena/ArduinoCore-samd/issues)
 
 Before posting a new issue, please check if the same problem has been already reported by someone else
 to avoid duplicates.
 
 ## Release History
+
+- [v2.0.0](https://github.com/mcci-catena/ArduinoCore-samd/releases/tag/v2.0.0) makes a major version jump primarily to avoid reusing versions that are used by tags in the repo for Adafruit BSPs. It also adds `_mcci_arduino_version` (issue [#28](https://github.com/mcci-catena/ArduinoCore-samd/issues/28)).
+
+- [v1.3.1](https://github.com/mcci-catena/ArduinoCore-samd/releases/tag/v1.3.1) corrected the version in `platform.txt`, which was missed.
+
+- [v1.3.0](https://github.com/mcci-catena/ArduinoCore-samd/releases/tag/v1.3.0) increases the serial port ring-buffer size (issue [#26](https://github.com/mcci-catena/ArduinoCore-samd/issues/26))
 
 - [v1.2.0](https://github.com/mcci-catena/ArduinoCore-samd/releases/tag/v1.2.0) adds several features. It moves flags in the link script to accomodate the BME680 BSEC library. It adapts the JSON templating system from the [MCCI STM32 BSP](https://github.com/mcci-catena/Arduino_Core_STM32). The `millis()` routine was updated so that the clock value will advance even if interrupts are disabled (issue [#17](https://github.com/mcci-catena/ArduinoCore-samd/issues/16)). Properly define the country code for as923jp (issue [#13](https://github.com/mcci-catena/ArduinoCore-samd/issues/13)). Fix typo `au915` should have been `au921`(issue [#12](https://github.com/mcci-catena/ArduinoCore-samd/issues/12)).
 
@@ -93,10 +97,11 @@ This core has been developed by Arduino LLC in collaboration with Atmel. The cop
 include Adafruit, but we think it probably should. Additional work was done by MCCI to incorporate better support LoRaWAN and the MCCI family of SAMD-based LoRa boards.
 
 ### LGPL License
+
 ```text
   Copyright (c) 2015 Arduino LLC.  All rights reserved.
   Portions copyright (c) Adafruit Industries.
-  Portions copyright (c) 2017-2018 MCCI Corporation.
+  Portions copyright (c) 2017-2019 MCCI Corporation.
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -115,4 +120,8 @@ include Adafruit, but we think it probably should. Additional work was done by M
 
 ### Trademark Acknowledgements
 
-MCCI and MCCI Catena are registered trademarks of MCCI Corporation. LoRaWAN is a trademark of the LoRa Alliance. All other trademarks are the properties of their respective owners.
+MCCI and MCCI Catena are registered trademarks of MCCI Corporation. LoRaWAN is a registered trademark of the LoRa Alliance. All other trademarks are the properties of their respective owners.
+
+### Support Open-Source Software, Hardware, and Community IoT
+
+Everyone at MCCI invests time and resources providing this open-source code and open-source hardware. MCCI is also the principal corporate sponsor of [The Things Network New York](https://thethings.nyc) and [Ithaca](https://ttni.tech). Please support our work by purchasing products from MCCI! Visit our on-line store at [store.mcci.com](https://store.mcci.com).
