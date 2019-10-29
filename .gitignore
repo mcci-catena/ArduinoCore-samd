@@ -2,3 +2,4 @@
 
 bootloaders/*/build/
 *~
+.vscode

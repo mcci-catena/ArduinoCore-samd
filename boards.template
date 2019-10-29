@@ -5,7 +5,7 @@
 #	Input to generate_boards.bri, produces Arduino IDE boards.txt.
 #
 # Copyright:
-#	Copyright (c) 2018 MCCI Corporation
+#	Copyright (c) 2018-2019 MCCI Corporation
 #
 #	This library is free software; you can redistribute it and/or
 #	modify it under the terms of the GNU Lesser General Public
@@ -32,7 +32,7 @@
 #	Define all the boards for this board support package to the Arduino IDE
 #
 # Copyright:
-#	Copyright (c) 2018 MCCI Corporation
+#	Copyright (c) 2018-2019 MCCI Corporation
 #
 #	This library is free software; you can redistribute it and/or
 #	modify it under the terms of the GNU Lesser General Public
@@ -101,7 +101,7 @@ menu.lorawan_region=LoRaWAN Region
 {{board}}.menu.lorawan_region.projcfg=Use arduino-lmic/project_confic/lmic_project_lmic_config_preconditions.h
 {{board}}.menu.lorawan_region.us915.build.lorawan_flags=-DCFG_us915=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
 {{board}}.menu.lorawan_region.eu868.build.lorawan_flags=-DCFG_eu868=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
-{{board}}.menu.lorawan_region.au915.build.lorawan_flags=-DCFG_au915=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
+{{board}}.menu.lorawan_region.au915.build.lorawan_flags=-DCFG_au915=1 -DCFG_au921=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
 {{board}}.menu.lorawan_region.as923.build.lorawan_flags=-DCFG_as923=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
 {{board}}.menu.lorawan_region.as923jp.build.lorawan_flags=-DCFG_as923=1 -DLMIC_COUNTRY_CODE=LMIC_COUNTRY_CODE_JP -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
 {{board}}.menu.lorawan_region.kr920.build.lorawan_flags=-DCFG_kr920=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
