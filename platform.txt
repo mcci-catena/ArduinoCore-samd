@@ -52,7 +52,7 @@ compiler.size.cmd=arm-none-eabi-size
 compiler.define=-DARDUINO=
 compiler.readelf.cmd=arm-none-eabi-readelf
 
-# this can be overriden in boards.txt
+# this can be overridden in boards.txt
 build.extra_flags=
 build.c.Werror=
 build.cpp.Werror=
@@ -71,6 +71,7 @@ compiler.elf2hex.extra_flags=
 # This is used to inject precompiled libraries:
 compiler.libraries.ldflags=
 
+# Set up the CMSIS flags
 compiler.arm.cmsis.c.flags="-I{runtime.tools.CMSIS-4.5.0.path}/CMSIS/Include/" "-I{runtime.tools.CMSIS-Atmel-1.1.0.path}/CMSIS/Device/ATMEL/"
 compiler.arm.cmsis.ldflags="-L{runtime.tools.CMSIS-4.5.0.path}/CMSIS/Lib/GCC/" -larm_cortexM0l_math
 
