@@ -7,7 +7,7 @@ For information, please refer to the [STM32 version of MCCI-ADDING-BOARDS.md](ht
 The following command is used to generate `boards.txt`.
 
 ```shell
-bright ../../stm32/1.1.0/generate_boards.bri boards.template boards.json > boards.txt
+bright ../../stm32/2.6.0/generate_boards.bri boards.template boards.json > boards.txt
 ```
 
-Change `../../stm32/1.1.0/` to the path to the most current MCCI STM32 bsp on your system.
+Change `../../stm32/2.6.0/` to the path to the most current MCCI STM32 BSP on your system.
