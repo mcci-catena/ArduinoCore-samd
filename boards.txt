@@ -5,7 +5,7 @@
 #	Define all the boards for this board support package to the Arduino IDE
 #
 # Copyright:
-#	Copyright (c) 2018-2019 MCCI Corporation
+#	Copyright (c) 2018-2020 MCCI Corporation
 #
 #	This library is free software; you can redistribute it and/or
 #	modify it under the terms of the GNU Lesser General Public
@@ -30,6 +30,8 @@
 
 # Additional menu items
 menu.lorawan_region=LoRaWAN Region
+menu.lorawan_network=LoRaWAN Network
+menu.lorawan_subband=LoRaWAN Subband
 
 #
 # Configuration information for MCCI Catena 4410 boards
@@ -47,7 +49,7 @@ mcci_catena_4410.build.usb_product="MCCI Catena 4410"
 mcci_catena_4410.build.usb_manufacturer="MCCI Corporation"
 mcci_catena_4410.build.board=MCCI_CATENA_4410
 mcci_catena_4410.build.core=arduino
-mcci_catena_4410.build.extra_flags=-DARDUINO_SAMD_ZERO -DARDUINO_SAMD_FEATHER_M0 -DMCCI_CATENA_4410 -D__SAMD21G18A__ {build.usb_flags} {build.lorawan_flags}
+mcci_catena_4410.build.extra_flags=-DARDUINO_SAMD_ZERO -DARDUINO_SAMD_FEATHER_M0 -DMCCI_CATENA_4410 -D__SAMD21G18A__ {build.usb_flags} {build.lorawan_flags} {build.lorawan_network_flags} {build.lorawan_subband_flags}
 # mcci_catena_4410.build.c.Werror=
 # mcci_catena_4410.build.cpp.Werror=
 # mcci_catena_4410.build.S.Werror=
@@ -78,6 +80,58 @@ mcci_catena_4410.menu.lorawan_region.kr920.build.lorawan_flags=-DCFG_kr920=1 -DC
 mcci_catena_4410.menu.lorawan_region.in866.build.lorawan_flags=-DCFG_in866=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
 mcci_catena_4410.menu.lorawan_region.projcfg.build.lorawan_flags=
 
+#
+# menu.lorawan_network
+mcci_catena_4410.menu.lorawan_network.ttn=The Things Network
+mcci_catena_4410.menu.lorawan_network.ttn.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_TTN=1
+mcci_catena_4410.menu.lorawan_network.actility=Actility ThingsPark
+mcci_catena_4410.menu.lorawan_network.actility.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_ACTILITY=1
+mcci_catena_4410.menu.lorawan_network.helium=Helium
+mcci_catena_4410.menu.lorawan_network.helium.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_HELIUM=1
+mcci_catena_4410.menu.lorawan_network.machineq=machineQ
+mcci_catena_4410.menu.lorawan_network.machineq.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_MACHINEQ=1
+mcci_catena_4410.menu.lorawan_network.senet=Senet
+mcci_catena_4410.menu.lorawan_network.senet.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_SENET=1
+mcci_catena_4410.menu.lorawan_network.senra=Senra
+mcci_catena_4410.menu.lorawan_network.senra.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_SENRA=1
+mcci_catena_4410.menu.lorawan_network.swisscom=Swisscom
+mcci_catena_4410.menu.lorawan_network.swisscom.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_SWISSCOM=1
+mcci_catena_4410.menu.lorawan_network.chirpstack=ChirpStack
+mcci_catena_4410.menu.lorawan_network.chirpstack.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_CHIRPSTACK=1
+mcci_catena_4410.menu.lorawan_network.generic=Generic
+mcci_catena_4410.menu.lorawan_network.generic.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_GENERIC=1
+mcci_catena_4410.menu.lorawan_network.projcfg=Use arduino-lmic/project_confic/lmic_project_lmic_config_preconditions.h
+mcci_catena_4410.menu.lorawan_network.projcfg.build.lorawan_network_flags=
+
+#
+# menul.lorawan_subband
+mcci_catena_4410.menu.lorawan_subband.default=Default, works everywhere
+mcci_catena_4410.menu.lorawan_subband.default.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=-1
+mcci_catena_4410.menu.lorawan_subband.sb0=sb0, ch 0~7 (US/AU/CN470)
+mcci_catena_4410.menu.lorawan_subband.sb0.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=0
+mcci_catena_4410.menu.lorawan_subband.sb1=sb1, ch 8~15 (US/AU/CN470)
+mcci_catena_4410.menu.lorawan_subband.sb1.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=1
+mcci_catena_4410.menu.lorawan_subband.sb2=sb2, ch 16~23 (US/AU/CN470)
+mcci_catena_4410.menu.lorawan_subband.sb2.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=2
+mcci_catena_4410.menu.lorawan_subband.sb3=sb3, ch 24~31 (US/AU/CN470)
+mcci_catena_4410.menu.lorawan_subband.sb3.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=3
+mcci_catena_4410.menu.lorawan_subband.sb4=sb4, ch 32~39 (US/AU/CN470)
+mcci_catena_4410.menu.lorawan_subband.sb4.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=4
+mcci_catena_4410.menu.lorawan_subband.sb5=sb5, ch 40~47 (US/AU/CN470)
+mcci_catena_4410.menu.lorawan_subband.sb5.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=5
+mcci_catena_4410.menu.lorawan_subband.sb6=sb6, ch 48~55 (US/AU/CN470)
+mcci_catena_4410.menu.lorawan_subband.sb6.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=6
+mcci_catena_4410.menu.lorawan_subband.sb7=sb7, ch 56~63 (US/AU/CN470)
+mcci_catena_4410.menu.lorawan_subband.sb7.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=7
+mcci_catena_4410.menu.lorawan_subband.sb8=sb8, ch 64~71 (CN470)
+mcci_catena_4410.menu.lorawan_subband.sb8.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=8
+mcci_catena_4410.menu.lorawan_subband.sb9=sb9, ch 72~79 (CN470)
+mcci_catena_4410.menu.lorawan_subband.sb9.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=9
+mcci_catena_4410.menu.lorawan_subband.sb10=sb10, ch 80~87 (CN470)
+mcci_catena_4410.menu.lorawan_subband.sb10.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=10
+mcci_catena_4410.menu.lorawan_subband.sb11=sb11, ch 88~95 (CN470)
+mcci_catena_4410.menu.lorawan_subband.sb11.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=11
+
 #### end of configuration info for MCCI Catena 4410
 
 #
@@ -96,7 +150,7 @@ mcci_catena_4420.build.usb_product="MCCI Catena 4420"
 mcci_catena_4420.build.usb_manufacturer="MCCI Corporation"
 mcci_catena_4420.build.board=MCCI_CATENA_4420
 mcci_catena_4420.build.core=arduino
-mcci_catena_4420.build.extra_flags=-DARDUINO_SAMD_ZERO -DARDUINO_SAMD_FEATHER_M0 -DMCCI_CATENA_4420 -D__SAMD21G18A__ {build.usb_flags} {build.lorawan_flags}
+mcci_catena_4420.build.extra_flags=-DARDUINO_SAMD_ZERO -DARDUINO_SAMD_FEATHER_M0 -DMCCI_CATENA_4420 -D__SAMD21G18A__ {build.usb_flags} {build.lorawan_flags} {build.lorawan_network_flags} {build.lorawan_subband_flags}
 # mcci_catena_4420.build.c.Werror=
 # mcci_catena_4420.build.cpp.Werror=
 # mcci_catena_4420.build.S.Werror=
@@ -127,6 +181,58 @@ mcci_catena_4420.menu.lorawan_region.kr920.build.lorawan_flags=-DCFG_kr920=1 -DC
 mcci_catena_4420.menu.lorawan_region.in866.build.lorawan_flags=-DCFG_in866=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
 mcci_catena_4420.menu.lorawan_region.projcfg.build.lorawan_flags=
 
+#
+# menu.lorawan_network
+mcci_catena_4420.menu.lorawan_network.ttn=The Things Network
+mcci_catena_4420.menu.lorawan_network.ttn.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_TTN=1
+mcci_catena_4420.menu.lorawan_network.actility=Actility ThingsPark
+mcci_catena_4420.menu.lorawan_network.actility.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_ACTILITY=1
+mcci_catena_4420.menu.lorawan_network.helium=Helium
+mcci_catena_4420.menu.lorawan_network.helium.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_HELIUM=1
+mcci_catena_4420.menu.lorawan_network.machineq=machineQ
+mcci_catena_4420.menu.lorawan_network.machineq.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_MACHINEQ=1
+mcci_catena_4420.menu.lorawan_network.senet=Senet
+mcci_catena_4420.menu.lorawan_network.senet.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_SENET=1
+mcci_catena_4420.menu.lorawan_network.senra=Senra
+mcci_catena_4420.menu.lorawan_network.senra.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_SENRA=1
+mcci_catena_4420.menu.lorawan_network.swisscom=Swisscom
+mcci_catena_4420.menu.lorawan_network.swisscom.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_SWISSCOM=1
+mcci_catena_4420.menu.lorawan_network.chirpstack=ChirpStack
+mcci_catena_4420.menu.lorawan_network.chirpstack.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_CHIRPSTACK=1
+mcci_catena_4420.menu.lorawan_network.generic=Generic
+mcci_catena_4420.menu.lorawan_network.generic.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_GENERIC=1
+mcci_catena_4420.menu.lorawan_network.projcfg=Use arduino-lmic/project_confic/lmic_project_lmic_config_preconditions.h
+mcci_catena_4420.menu.lorawan_network.projcfg.build.lorawan_network_flags=
+
+#
+# menul.lorawan_subband
+mcci_catena_4420.menu.lorawan_subband.default=Default, works everywhere
+mcci_catena_4420.menu.lorawan_subband.default.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=-1
+mcci_catena_4420.menu.lorawan_subband.sb0=sb0, ch 0~7 (US/AU/CN470)
+mcci_catena_4420.menu.lorawan_subband.sb0.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=0
+mcci_catena_4420.menu.lorawan_subband.sb1=sb1, ch 8~15 (US/AU/CN470)
+mcci_catena_4420.menu.lorawan_subband.sb1.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=1
+mcci_catena_4420.menu.lorawan_subband.sb2=sb2, ch 16~23 (US/AU/CN470)
+mcci_catena_4420.menu.lorawan_subband.sb2.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=2
+mcci_catena_4420.menu.lorawan_subband.sb3=sb3, ch 24~31 (US/AU/CN470)
+mcci_catena_4420.menu.lorawan_subband.sb3.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=3
+mcci_catena_4420.menu.lorawan_subband.sb4=sb4, ch 32~39 (US/AU/CN470)
+mcci_catena_4420.menu.lorawan_subband.sb4.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=4
+mcci_catena_4420.menu.lorawan_subband.sb5=sb5, ch 40~47 (US/AU/CN470)
+mcci_catena_4420.menu.lorawan_subband.sb5.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=5
+mcci_catena_4420.menu.lorawan_subband.sb6=sb6, ch 48~55 (US/AU/CN470)
+mcci_catena_4420.menu.lorawan_subband.sb6.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=6
+mcci_catena_4420.menu.lorawan_subband.sb7=sb7, ch 56~63 (US/AU/CN470)
+mcci_catena_4420.menu.lorawan_subband.sb7.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=7
+mcci_catena_4420.menu.lorawan_subband.sb8=sb8, ch 64~71 (CN470)
+mcci_catena_4420.menu.lorawan_subband.sb8.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=8
+mcci_catena_4420.menu.lorawan_subband.sb9=sb9, ch 72~79 (CN470)
+mcci_catena_4420.menu.lorawan_subband.sb9.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=9
+mcci_catena_4420.menu.lorawan_subband.sb10=sb10, ch 80~87 (CN470)
+mcci_catena_4420.menu.lorawan_subband.sb10.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=10
+mcci_catena_4420.menu.lorawan_subband.sb11=sb11, ch 88~95 (CN470)
+mcci_catena_4420.menu.lorawan_subband.sb11.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=11
+
 #### end of configuration info for MCCI Catena 4420
 
 #
@@ -145,7 +251,7 @@ mcci_catena_4450.build.usb_product="MCCI Catena 4450"
 mcci_catena_4450.build.usb_manufacturer="MCCI Corporation"
 mcci_catena_4450.build.board=MCCI_CATENA_4450
 mcci_catena_4450.build.core=arduino
-mcci_catena_4450.build.extra_flags=-DARDUINO_SAMD_ZERO -DARDUINO_SAMD_FEATHER_M0 -DMCCI_CATENA_4450 -D__SAMD21G18A__ {build.usb_flags} {build.lorawan_flags}
+mcci_catena_4450.build.extra_flags=-DARDUINO_SAMD_ZERO -DARDUINO_SAMD_FEATHER_M0 -DMCCI_CATENA_4450 -D__SAMD21G18A__ {build.usb_flags} {build.lorawan_flags} {build.lorawan_network_flags} {build.lorawan_subband_flags}
 # mcci_catena_4450.build.c.Werror=
 # mcci_catena_4450.build.cpp.Werror=
 # mcci_catena_4450.build.S.Werror=
@@ -176,6 +282,58 @@ mcci_catena_4450.menu.lorawan_region.kr920.build.lorawan_flags=-DCFG_kr920=1 -DC
 mcci_catena_4450.menu.lorawan_region.in866.build.lorawan_flags=-DCFG_in866=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
 mcci_catena_4450.menu.lorawan_region.projcfg.build.lorawan_flags=
 
+#
+# menu.lorawan_network
+mcci_catena_4450.menu.lorawan_network.ttn=The Things Network
+mcci_catena_4450.menu.lorawan_network.ttn.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_TTN=1
+mcci_catena_4450.menu.lorawan_network.actility=Actility ThingsPark
+mcci_catena_4450.menu.lorawan_network.actility.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_ACTILITY=1
+mcci_catena_4450.menu.lorawan_network.helium=Helium
+mcci_catena_4450.menu.lorawan_network.helium.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_HELIUM=1
+mcci_catena_4450.menu.lorawan_network.machineq=machineQ
+mcci_catena_4450.menu.lorawan_network.machineq.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_MACHINEQ=1
+mcci_catena_4450.menu.lorawan_network.senet=Senet
+mcci_catena_4450.menu.lorawan_network.senet.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_SENET=1
+mcci_catena_4450.menu.lorawan_network.senra=Senra
+mcci_catena_4450.menu.lorawan_network.senra.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_SENRA=1
+mcci_catena_4450.menu.lorawan_network.swisscom=Swisscom
+mcci_catena_4450.menu.lorawan_network.swisscom.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_SWISSCOM=1
+mcci_catena_4450.menu.lorawan_network.chirpstack=ChirpStack
+mcci_catena_4450.menu.lorawan_network.chirpstack.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_CHIRPSTACK=1
+mcci_catena_4450.menu.lorawan_network.generic=Generic
+mcci_catena_4450.menu.lorawan_network.generic.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_GENERIC=1
+mcci_catena_4450.menu.lorawan_network.projcfg=Use arduino-lmic/project_confic/lmic_project_lmic_config_preconditions.h
+mcci_catena_4450.menu.lorawan_network.projcfg.build.lorawan_network_flags=
+
+#
+# menul.lorawan_subband
+mcci_catena_4450.menu.lorawan_subband.default=Default, works everywhere
+mcci_catena_4450.menu.lorawan_subband.default.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=-1
+mcci_catena_4450.menu.lorawan_subband.sb0=sb0, ch 0~7 (US/AU/CN470)
+mcci_catena_4450.menu.lorawan_subband.sb0.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=0
+mcci_catena_4450.menu.lorawan_subband.sb1=sb1, ch 8~15 (US/AU/CN470)
+mcci_catena_4450.menu.lorawan_subband.sb1.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=1
+mcci_catena_4450.menu.lorawan_subband.sb2=sb2, ch 16~23 (US/AU/CN470)
+mcci_catena_4450.menu.lorawan_subband.sb2.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=2
+mcci_catena_4450.menu.lorawan_subband.sb3=sb3, ch 24~31 (US/AU/CN470)
+mcci_catena_4450.menu.lorawan_subband.sb3.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=3
+mcci_catena_4450.menu.lorawan_subband.sb4=sb4, ch 32~39 (US/AU/CN470)
+mcci_catena_4450.menu.lorawan_subband.sb4.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=4
+mcci_catena_4450.menu.lorawan_subband.sb5=sb5, ch 40~47 (US/AU/CN470)
+mcci_catena_4450.menu.lorawan_subband.sb5.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=5
+mcci_catena_4450.menu.lorawan_subband.sb6=sb6, ch 48~55 (US/AU/CN470)
+mcci_catena_4450.menu.lorawan_subband.sb6.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=6
+mcci_catena_4450.menu.lorawan_subband.sb7=sb7, ch 56~63 (US/AU/CN470)
+mcci_catena_4450.menu.lorawan_subband.sb7.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=7
+mcci_catena_4450.menu.lorawan_subband.sb8=sb8, ch 64~71 (CN470)
+mcci_catena_4450.menu.lorawan_subband.sb8.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=8
+mcci_catena_4450.menu.lorawan_subband.sb9=sb9, ch 72~79 (CN470)
+mcci_catena_4450.menu.lorawan_subband.sb9.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=9
+mcci_catena_4450.menu.lorawan_subband.sb10=sb10, ch 80~87 (CN470)
+mcci_catena_4450.menu.lorawan_subband.sb10.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=10
+mcci_catena_4450.menu.lorawan_subband.sb11=sb11, ch 88~95 (CN470)
+mcci_catena_4450.menu.lorawan_subband.sb11.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=11
+
 #### end of configuration info for MCCI Catena 4450
 
 #
@@ -194,7 +352,7 @@ mcci_catena_4460.build.usb_product="MCCI Catena 4460"
 mcci_catena_4460.build.usb_manufacturer="MCCI Corporation"
 mcci_catena_4460.build.board=MCCI_CATENA_4460
 mcci_catena_4460.build.core=arduino
-mcci_catena_4460.build.extra_flags=-DARDUINO_SAMD_ZERO -DARDUINO_SAMD_FEATHER_M0 -DMCCI_CATENA_4460 -D__SAMD21G18A__ {build.usb_flags} {build.lorawan_flags}
+mcci_catena_4460.build.extra_flags=-DARDUINO_SAMD_ZERO -DARDUINO_SAMD_FEATHER_M0 -DMCCI_CATENA_4460 -D__SAMD21G18A__ {build.usb_flags} {build.lorawan_flags} {build.lorawan_network_flags} {build.lorawan_subband_flags}
 # mcci_catena_4460.build.c.Werror=
 # mcci_catena_4460.build.cpp.Werror=
 # mcci_catena_4460.build.S.Werror=
@@ -225,6 +383,58 @@ mcci_catena_4460.menu.lorawan_region.kr920.build.lorawan_flags=-DCFG_kr920=1 -DC
 mcci_catena_4460.menu.lorawan_region.in866.build.lorawan_flags=-DCFG_in866=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
 mcci_catena_4460.menu.lorawan_region.projcfg.build.lorawan_flags=
 
+#
+# menu.lorawan_network
+mcci_catena_4460.menu.lorawan_network.ttn=The Things Network
+mcci_catena_4460.menu.lorawan_network.ttn.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_TTN=1
+mcci_catena_4460.menu.lorawan_network.actility=Actility ThingsPark
+mcci_catena_4460.menu.lorawan_network.actility.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_ACTILITY=1
+mcci_catena_4460.menu.lorawan_network.helium=Helium
+mcci_catena_4460.menu.lorawan_network.helium.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_HELIUM=1
+mcci_catena_4460.menu.lorawan_network.machineq=machineQ
+mcci_catena_4460.menu.lorawan_network.machineq.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_MACHINEQ=1
+mcci_catena_4460.menu.lorawan_network.senet=Senet
+mcci_catena_4460.menu.lorawan_network.senet.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_SENET=1
+mcci_catena_4460.menu.lorawan_network.senra=Senra
+mcci_catena_4460.menu.lorawan_network.senra.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_SENRA=1
+mcci_catena_4460.menu.lorawan_network.swisscom=Swisscom
+mcci_catena_4460.menu.lorawan_network.swisscom.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_SWISSCOM=1
+mcci_catena_4460.menu.lorawan_network.chirpstack=ChirpStack
+mcci_catena_4460.menu.lorawan_network.chirpstack.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_CHIRPSTACK=1
+mcci_catena_4460.menu.lorawan_network.generic=Generic
+mcci_catena_4460.menu.lorawan_network.generic.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_GENERIC=1
+mcci_catena_4460.menu.lorawan_network.projcfg=Use arduino-lmic/project_confic/lmic_project_lmic_config_preconditions.h
+mcci_catena_4460.menu.lorawan_network.projcfg.build.lorawan_network_flags=
+
+#
+# menul.lorawan_subband
+mcci_catena_4460.menu.lorawan_subband.default=Default, works everywhere
+mcci_catena_4460.menu.lorawan_subband.default.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=-1
+mcci_catena_4460.menu.lorawan_subband.sb0=sb0, ch 0~7 (US/AU/CN470)
+mcci_catena_4460.menu.lorawan_subband.sb0.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=0
+mcci_catena_4460.menu.lorawan_subband.sb1=sb1, ch 8~15 (US/AU/CN470)
+mcci_catena_4460.menu.lorawan_subband.sb1.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=1
+mcci_catena_4460.menu.lorawan_subband.sb2=sb2, ch 16~23 (US/AU/CN470)
+mcci_catena_4460.menu.lorawan_subband.sb2.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=2
+mcci_catena_4460.menu.lorawan_subband.sb3=sb3, ch 24~31 (US/AU/CN470)
+mcci_catena_4460.menu.lorawan_subband.sb3.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=3
+mcci_catena_4460.menu.lorawan_subband.sb4=sb4, ch 32~39 (US/AU/CN470)
+mcci_catena_4460.menu.lorawan_subband.sb4.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=4
+mcci_catena_4460.menu.lorawan_subband.sb5=sb5, ch 40~47 (US/AU/CN470)
+mcci_catena_4460.menu.lorawan_subband.sb5.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=5
+mcci_catena_4460.menu.lorawan_subband.sb6=sb6, ch 48~55 (US/AU/CN470)
+mcci_catena_4460.menu.lorawan_subband.sb6.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=6
+mcci_catena_4460.menu.lorawan_subband.sb7=sb7, ch 56~63 (US/AU/CN470)
+mcci_catena_4460.menu.lorawan_subband.sb7.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=7
+mcci_catena_4460.menu.lorawan_subband.sb8=sb8, ch 64~71 (CN470)
+mcci_catena_4460.menu.lorawan_subband.sb8.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=8
+mcci_catena_4460.menu.lorawan_subband.sb9=sb9, ch 72~79 (CN470)
+mcci_catena_4460.menu.lorawan_subband.sb9.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=9
+mcci_catena_4460.menu.lorawan_subband.sb10=sb10, ch 80~87 (CN470)
+mcci_catena_4460.menu.lorawan_subband.sb10.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=10
+mcci_catena_4460.menu.lorawan_subband.sb11=sb11, ch 88~95 (CN470)
+mcci_catena_4460.menu.lorawan_subband.sb11.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=11
+
 #### end of configuration info for MCCI Catena 4460
 
 #
@@ -243,7 +453,7 @@ mcci_catena_4470.build.usb_product="MCCI Catena 4470"
 mcci_catena_4470.build.usb_manufacturer="MCCI Corporation"
 mcci_catena_4470.build.board=MCCI_CATENA_4470
 mcci_catena_4470.build.core=arduino
-mcci_catena_4470.build.extra_flags=-DARDUINO_SAMD_ZERO -DARDUINO_SAMD_FEATHER_M0 -DMCCI_CATENA_4470 -D__SAMD21G18A__ {build.usb_flags} {build.lorawan_flags}
+mcci_catena_4470.build.extra_flags=-DARDUINO_SAMD_ZERO -DARDUINO_SAMD_FEATHER_M0 -DMCCI_CATENA_4470 -D__SAMD21G18A__ {build.usb_flags} {build.lorawan_flags} {build.lorawan_network_flags} {build.lorawan_subband_flags}
 # mcci_catena_4470.build.c.Werror=
 # mcci_catena_4470.build.cpp.Werror=
 # mcci_catena_4470.build.S.Werror=
@@ -273,6 +483,58 @@ mcci_catena_4470.menu.lorawan_region.as923jp.build.lorawan_flags=-DCFG_as923=1 -
 mcci_catena_4470.menu.lorawan_region.kr920.build.lorawan_flags=-DCFG_kr920=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
 mcci_catena_4470.menu.lorawan_region.in866.build.lorawan_flags=-DCFG_in866=1 -DCFG_sx1276_radio=1 -DARDUINO_LMIC_PROJECT_CONFIG_H=lmic_config_preconditions.h
 mcci_catena_4470.menu.lorawan_region.projcfg.build.lorawan_flags=
+
+#
+# menu.lorawan_network
+mcci_catena_4470.menu.lorawan_network.ttn=The Things Network
+mcci_catena_4470.menu.lorawan_network.ttn.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_TTN=1
+mcci_catena_4470.menu.lorawan_network.actility=Actility ThingsPark
+mcci_catena_4470.menu.lorawan_network.actility.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_ACTILITY=1
+mcci_catena_4470.menu.lorawan_network.helium=Helium
+mcci_catena_4470.menu.lorawan_network.helium.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_HELIUM=1
+mcci_catena_4470.menu.lorawan_network.machineq=machineQ
+mcci_catena_4470.menu.lorawan_network.machineq.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_MACHINEQ=1
+mcci_catena_4470.menu.lorawan_network.senet=Senet
+mcci_catena_4470.menu.lorawan_network.senet.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_SENET=1
+mcci_catena_4470.menu.lorawan_network.senra=Senra
+mcci_catena_4470.menu.lorawan_network.senra.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_SENRA=1
+mcci_catena_4470.menu.lorawan_network.swisscom=Swisscom
+mcci_catena_4470.menu.lorawan_network.swisscom.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_SWISSCOM=1
+mcci_catena_4470.menu.lorawan_network.chirpstack=ChirpStack
+mcci_catena_4470.menu.lorawan_network.chirpstack.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_CHIRPSTACK=1
+mcci_catena_4470.menu.lorawan_network.generic=Generic
+mcci_catena_4470.menu.lorawan_network.generic.build.lorawan_network_flags=-DARDUINO_LMIC_CFG_NETWORK_GENERIC=1
+mcci_catena_4470.menu.lorawan_network.projcfg=Use arduino-lmic/project_confic/lmic_project_lmic_config_preconditions.h
+mcci_catena_4470.menu.lorawan_network.projcfg.build.lorawan_network_flags=
+
+#
+# menul.lorawan_subband
+mcci_catena_4470.menu.lorawan_subband.default=Default, works everywhere
+mcci_catena_4470.menu.lorawan_subband.default.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=-1
+mcci_catena_4470.menu.lorawan_subband.sb0=sb0, ch 0~7 (US/AU/CN470)
+mcci_catena_4470.menu.lorawan_subband.sb0.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=0
+mcci_catena_4470.menu.lorawan_subband.sb1=sb1, ch 8~15 (US/AU/CN470)
+mcci_catena_4470.menu.lorawan_subband.sb1.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=1
+mcci_catena_4470.menu.lorawan_subband.sb2=sb2, ch 16~23 (US/AU/CN470)
+mcci_catena_4470.menu.lorawan_subband.sb2.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=2
+mcci_catena_4470.menu.lorawan_subband.sb3=sb3, ch 24~31 (US/AU/CN470)
+mcci_catena_4470.menu.lorawan_subband.sb3.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=3
+mcci_catena_4470.menu.lorawan_subband.sb4=sb4, ch 32~39 (US/AU/CN470)
+mcci_catena_4470.menu.lorawan_subband.sb4.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=4
+mcci_catena_4470.menu.lorawan_subband.sb5=sb5, ch 40~47 (US/AU/CN470)
+mcci_catena_4470.menu.lorawan_subband.sb5.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=5
+mcci_catena_4470.menu.lorawan_subband.sb6=sb6, ch 48~55 (US/AU/CN470)
+mcci_catena_4470.menu.lorawan_subband.sb6.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=6
+mcci_catena_4470.menu.lorawan_subband.sb7=sb7, ch 56~63 (US/AU/CN470)
+mcci_catena_4470.menu.lorawan_subband.sb7.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=7
+mcci_catena_4470.menu.lorawan_subband.sb8=sb8, ch 64~71 (CN470)
+mcci_catena_4470.menu.lorawan_subband.sb8.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=8
+mcci_catena_4470.menu.lorawan_subband.sb9=sb9, ch 72~79 (CN470)
+mcci_catena_4470.menu.lorawan_subband.sb9.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=9
+mcci_catena_4470.menu.lorawan_subband.sb10=sb10, ch 80~87 (CN470)
+mcci_catena_4470.menu.lorawan_subband.sb10.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=10
+mcci_catena_4470.menu.lorawan_subband.sb11=sb11, ch 88~95 (CN470)
+mcci_catena_4470.menu.lorawan_subband.sb11.lorawan_subband_flags=-DARDUINO_LMIC_CFG_SUBBAND=11
 
 #### end of configuration info for MCCI Catena 4470
 
