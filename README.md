@@ -5,7 +5,7 @@ for MCCI Catena IoT devices.  It is based on the Arduino core
 for Atmel's SAMD21 processor (used on the Arduino/Genuino Zero, MKR1000 and MKRZero boards),
 as extended by Adafruit for their SAMD Boards such as the Feather M0, and further extended by MCCI to support its MCCI Catena LoRaWAN&reg; technology boards.
 
-[![GitHub release](https://img.shields.io/github/release/mcci-catena/ArduinoCore-samd.svg)](https://github.com/mcci-catena/ArduinoCore-samd/releases/latest) [![GitHub commits](https://img.shields.io/github/commits-since/mcci-catena/ArduinoCore-samd/latest.svg)](https://github.com/mcci-catena/ArduinoCore-samd/compare/v2.1.0...master)
+[![GitHub release](https://img.shields.io/github/release/mcci-catena/ArduinoCore-samd.svg)](https://github.com/mcci-catena/ArduinoCore-samd/releases/latest) [![GitHub commits](https://img.shields.io/github/commits-since/mcci-catena/ArduinoCore-samd/latest.svg)](https://github.com/mcci-catena/ArduinoCore-samd/compare/v2.2.0...master)
 
 **Contents:**
 <!-- markdownlint-disable MD033 -->
@@ -81,7 +81,9 @@ to avoid duplicates.
 
 ## Release History
 
-- [V2.1.0](https://github.com/mcci-catena/ArduinoCore-samd/releases/tag/v2.1.0) added support for the LoRaWAN Region KR-920 (issue [#34](https://github.com/mcci-catena/ArduinoCore-samd/issues/34)). Rename AU921 region to AU915 (retaining `CFG_au921` redundant symbol for older LMICs) ([#37](https://github.com/mcci-catena/ArduinoCore-samd/issues/37), [#38](https://github.com/mcci-catena/ArduinoCore-samd/issues/38)). Add support for new IDE features for injecting precompiled objects ([#39](https://github.com/mcci-catena/ArduinoCore-samd/issues/39)).
+- [v2.2.0](https://github.com/mcci-catena/ArduinoCore-samd/releases/tag/v2.2.0) adds support for UI selection of network and subband.
+
+- [v2.1.0](https://github.com/mcci-catena/ArduinoCore-samd/releases/tag/v2.1.0) added support for the LoRaWAN Region KR-920 (issue [#34](https://github.com/mcci-catena/ArduinoCore-samd/issues/34)). Rename AU921 region to AU915 (retaining `CFG_au921` redundant symbol for older LMICs) ([#37](https://github.com/mcci-catena/ArduinoCore-samd/issues/37), [#38](https://github.com/mcci-catena/ArduinoCore-samd/issues/38)). Add support for new IDE features for injecting precompiled objects ([#39](https://github.com/mcci-catena/ArduinoCore-samd/issues/39)).
 
 - [v2.0.0](https://github.com/mcci-catena/ArduinoCore-samd/releases/tag/v2.0.0) makes a major version jump primarily to avoid reusing versions that are used by tags in the repo for Adafruit BSPs. It also adds `_mcci_arduino_version` (issue [#28](https://github.com/mcci-catena/ArduinoCore-samd/issues/28)).
 
