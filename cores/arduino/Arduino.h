@@ -25,7 +25,7 @@
 #define _mcci_arduino_version_calc(major, minor, patch, local)	\
 	(((major) << 24u) | ((minor) << 16u) | ((patch) << 8u) | (local))
 
-#define	_mcci_arduino_version	_mcci_arduino_version_calc(2,1,0,0)	/* v2.1.0.0 */
+#define	_mcci_arduino_version	_mcci_arduino_version_calc(2,2,0,0)	/* v2.2.0.0 */
 
 #define	_mcci_arduino_version_get_major(v)	\
 	(((v) >> 24u) & 0xFFu)
