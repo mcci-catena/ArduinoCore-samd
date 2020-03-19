@@ -1,0 +1,166 @@
+;*****************************************************************************
+; 
+; Name: mcci-catena-samd.inf
+;
+; Function:
+;	Installs the driver for MCCI Catena SAMD Version Boards
+;
+; Copyright (c) 2020 MCCI Corporation
+;
+; MCCI is a registered trademark of MCCI Corporation.
+;
+;*****************************************************************************
+
+[Version] 
+Signature="$Windows NT$" 
+Class=Ports 
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318} 
+Provider=%MFG% 
+;LayoutFile = layout.inf
+CatalogFile.nt = mcci-catena-samd.cat
+CatalogFile.ntx86 = mcci-catena-samd.cat
+CatalogFile.ntia64 = mcci-catena-samd.cat
+CatalogFile.ntamd64 = mcci-catena-samd.cat
+; DriverVer date is MM/DD/YYYY
+DriverVer=03/16/2020,1.0.0.0
+
+[Manufacturer] 
+%MFG%=MCCICatena, NT, NTx86, NTia64, NTamd64
+
+[MCCICatena.NT] 
+%mcci_catena_4410.name%=MCCICatenaInstall, USB\VID_040E&PID_0021
+%mcci_catena_4420.name%=MCCICatenaInstall, USB\VID_040E&PID_0061
+%mcci_catena_4450.name%=MCCICatenaInstall, USB\VID_040E&PID_0031
+%mcci_catena_4460.name%=MCCICatenaInstall, USB\VID_040E&PID_0051
+%mcci_catena_4470.name%=MCCICatenaInstall, USB\VID_040E&PID_0071
+
+[MCCICatena.NTx86] 
+%mcci_catena_4410.name%=MCCICatenaInstall, USB\VID_040E&PID_0021
+%mcci_catena_4420.name%=MCCICatenaInstall, USB\VID_040E&PID_0061
+%mcci_catena_4450.name%=MCCICatenaInstall, USB\VID_040E&PID_0031
+%mcci_catena_4460.name%=MCCICatenaInstall, USB\VID_040E&PID_0051
+%mcci_catena_4470.name%=MCCICatenaInstall, USB\VID_040E&PID_0071
+
+[MCCICatena.NTia64] 
+%mcci_catena_4410.name%=MCCICatenaInstall, USB\VID_040E&PID_0021
+%mcci_catena_4420.name%=MCCICatenaInstall, USB\VID_040E&PID_0061
+%mcci_catena_4450.name%=MCCICatenaInstall, USB\VID_040E&PID_0031
+%mcci_catena_4460.name%=MCCICatenaInstall, USB\VID_040E&PID_0051
+%mcci_catena_4470.name%=MCCICatenaInstall, USB\VID_040E&PID_0071
+
+[MCCICatena.NTamd64] 
+%mcci_catena_4410.name%=MCCICatenaInstall, USB\VID_040E&PID_0021
+%mcci_catena_4420.name%=MCCICatenaInstall, USB\VID_040E&PID_0061
+%mcci_catena_4450.name%=MCCICatenaInstall, USB\VID_040E&PID_0031
+%mcci_catena_4460.name%=MCCICatenaInstall, USB\VID_040E&PID_0051
+%mcci_catena_4470.name%=MCCICatenaInstall, USB\VID_040E&PID_0071
+
+[DestinationDirs]
+FakeModemCopyFileSection = 12  ;%windir%\system32\drivers
+DefaultDestDir = 12
+
+;************************************
+;* NT
+;************************************
+;************************************
+;* DEVICE
+;************************************
+
+[MCCICatenaInstall.NT]
+include=mdmcpq.inf,usb.inf
+CopyFiles=FakeModemCopyFileSection
+AddReg=MCCICatenaInstall_AddReg 
+
+[MCCICatenaInstall.NT.Services] 
+include=mdmcpq.inf
+AddService = usbser, 0x00000002, MCCICatenaInstall_Service_Inst
+
+[MCCICatenaInstall.NT.HW]
+include=mdmcpq.inf
+
+
+;************************************
+;* NTx86
+;************************************
+;************************************
+;* DEVICE
+;************************************
+
+[MCCICatenaInstall.NTx86]
+include=mdmcpq.inf,usb.inf
+CopyFiles=FakeModemCopyFileSection
+AddReg=MCCICatenaInstall_AddReg 
+
+[MCCICatenaInstall.NTx86.Services] 
+include=mdmcpq.inf
+AddService = usbser, 0x00000002, MCCICatenaInstall_Service_Inst 
+
+[MCCICatenaInstall.NTx86.HW]
+include=mdmcpq.inf
+
+
+;************************************
+;* NTia64
+;************************************
+;************************************
+;* DEVICE
+;************************************
+
+[MCCICatenaInstall.NTia64]
+include=mdmcpq.inf,usb.inf
+CopyFiles=FakeModemCopyFileSection
+AddReg=MCCICatenaInstall_AddReg 
+
+[MCCICatenaInstall.NTia64.Services] 
+include=mdmcpq.inf
+AddService = usbser, 0x00000002, MCCICatenaInstall_Service_Inst
+
+[MCCICatenaInstall.NTia64.HW]
+include=mdmcpq.inf
+
+
+;************************************
+;* NTamd64
+;************************************
+;************************************
+;* DEVICE
+;************************************
+
+[MCCICatenaInstall.NTamd64]
+include=mdmcpq.inf,usb.inf
+CopyFiles=FakeModemCopyFileSection
+AddReg=MCCICatenaInstall_AddReg 
+
+[MCCICatenaInstall.NTamd64.Services] 
+include=mdmcpq.inf
+AddService = usbser, 0x00000002, MCCICatenaInstall_Service_Inst
+
+[MCCICatenaInstall.NTamd64.HW]
+include=mdmcpq.inf
+
+[FakeModemCopyFileSection]
+;USBSER.sys,,,0x20
+
+[MCCICatenaInstall_AddReg] 
+HKR,,DevLoader,,*ntkern 
+HKR,,NTMPDriver,,usbser.sys 
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider" 
+
+
+[MCCICatenaInstall_Service_Inst] 
+DisplayName = %ServiceName% 
+ServiceType = 1 ; SERVICE_KERNEL_DRIVER 
+StartType = 3 ; SERVICE_DEMAND_START 
+ErrorControl = 1 ; SERVICE_ERROR_NORMAL 
+ServiceBinary = %12%\usbser.sys 
+LoadOrderGroup = Base 
+
+
+[Strings] 
+MFG = "MCCI Corporation"
+mcci_catena_4410.name="MCCI Catena 4410"
+mcci_catena_4420.name="MCCI Catena 4420"
+mcci_catena_4450.name="MCCI Catena 4450"
+mcci_catena_4460.name="MCCI Catena 4460"
+mcci_catena_4470.name="MCCI Catena 4470"
+ServiceName = "MCCI Catena SAMD USB Serial Driver"
