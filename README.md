@@ -5,7 +5,7 @@ for MCCI Catena IoT devices.  It is based on the Arduino core
 for Atmel's SAMD21 processor (used on the Arduino/Genuino Zero, MKR1000 and MKRZero boards),
 as extended by Adafruit for their SAMD Boards such as the Feather M0, and further extended by MCCI to support its MCCI Catena LoRaWAN&reg; technology boards.
 
-[![GitHub release](https://img.shields.io/github/release/mcci-catena/ArduinoCore-samd.svg)](https://github.com/mcci-catena/ArduinoCore-samd/releases/latest) [![GitHub commits](https://img.shields.io/github/commits-since/mcci-catena/ArduinoCore-samd/latest.svg)](https://github.com/mcci-catena/ArduinoCore-samd/compare/v2.2.0...master)
+[![GitHub release](https://img.shields.io/github/release/mcci-catena/ArduinoCore-samd.svg)](https://github.com/mcci-catena/ArduinoCore-samd/releases/latest) [![GitHub commits](https://img.shields.io/github/commits-since/mcci-catena/ArduinoCore-samd/latest.svg)](https://github.com/mcci-catena/ArduinoCore-samd/compare/v2.3.0...master)
 
 **Contents:**
 <!-- markdownlint-disable MD033 -->
@@ -80,6 +80,8 @@ Before posting a new issue, please check if the same problem has been already re
 to avoid duplicates.
 
 ## Release History
+
+- [v2.3.0](https://github.com/mcci-catena/ArduinoCore-samd/releases/tag/v2.3.0) adds Catena SAMD driver installers and post installer scripts.
 
 - [v2.2.0](https://github.com/mcci-catena/ArduinoCore-samd/releases/tag/v2.2.0) adds support for UI selection of network and subband.
 
